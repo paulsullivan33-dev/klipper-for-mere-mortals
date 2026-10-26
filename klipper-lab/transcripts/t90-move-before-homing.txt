@@ -1,0 +1,11 @@
+$ klippy.py printer.cfg -i move-first.gcode -o move-first.out -d $KLIPPER/out/klipper.dict
+INFO:root:Starting Klippy...
+INFO:root:Start printer at Mon Oct 26 03:52:43 2026 (1792986763.8 3320.5)
+INFO:root:Extruder max_extrude_ratio=0.266081
+INFO:root:Loaded MCU 'mcu' 149 commands (ee2c6fb / gcc: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 binutils: (GNU Binutils for Ubuntu) 2.42)
+MCU 'mcu' config: ADC_MAX=4095 CLOCK_FREQ=50000000 MCU=linux PCA9685_MAX=4096 PWM_MAX=32768 STATS_SUMSQ_BASE=256 STEPPER_STEP_BOTH_EDGE=1
+MCU 'mcu' kconfig: 'CONFIG_MACH_LINUX=y\n'
+INFO:root:Sending MCU 'mcu' printer configuration...
+INFO:root:Configured MCU 'mcu' (500 moves)
+WARNING:root:Must home axis first: 10.000 0.000 0.000 [0.000]
+(exit status: 255)

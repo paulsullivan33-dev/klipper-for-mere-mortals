@@ -1,0 +1,36 @@
+$ klippy.py printer.cfg -i checks.gcode -o checks.out -d $KLIPPER/out/klipper.dict
+INFO:root:Starting Klippy...
+INFO:root:Start printer at Mon Oct 26 03:52:42 2026 (1792986762.3 3319.0)
+INFO:root:Extruder max_extrude_ratio=0.266081
+INFO:root:Loaded MCU 'mcu' 149 commands (ee2c6fb / gcc: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 binutils: (GNU Binutils for Ubuntu) 2.42)
+MCU 'mcu' config: ADC_MAX=4095 CLOCK_FREQ=50000000 MCU=linux PCA9685_MAX=4096 PWM_MAX=32768 STATS_SUMSQ_BASE=256 STEPPER_STEP_BOTH_EDGE=1
+MCU 'mcu' kconfig: 'CONFIG_MACH_LINUX=y\n'
+INFO:root:Sending MCU 'mcu' printer configuration...
+INFO:root:Configured MCU 'mcu' (500 moves)
+INFO:root:mcu: stepper_x:0 stepper_y:0 stepper_z:0
+stepper: stepper_x:0.000000 stepper_y:0.000000 stepper_z:0.000000
+kinematic: X:0.000000 Y:0.000000 Z:0.000000
+toolhead: X:0.000000 Y:0.000000 Z:0.000000 E:0.000000
+gcode: X:0.000000 Y:0.000000 Z:0.000000 E:0.000000
+gcode base: X:0.000000 Y:0.000000 Z:0.000000 E:0.000000
+gcode homing: X:0.000000 Y:0.000000 Z:0.000000
+INFO:root:mcu: stepper_x:-26800 stepper_y:-26800 stepper_z:-152000
+stepper: stepper_x:0.000000 stepper_y:0.000000 stepper_z:0.000000
+kinematic: X:0.000000 Y:0.000000 Z:0.000000
+toolhead: X:100.000000 Y:100.000000 Z:10.000000 E:0.000000
+gcode: X:100.000000 Y:100.000000 Z:10.000000 E:0.000000
+gcode base: X:0.000000 Y:0.000000 Z:0.000000 E:0.000000
+gcode homing: X:0.000000 Y:0.000000 Z:0.000000
+INFO:root:mcu: stepper_x:-45600 stepper_y:-45600 stepper_z:-300000
+stepper: stepper_x:0.000000 stepper_y:0.000000 stepper_z:0.000000
+kinematic: X:0.000000 Y:0.000000 Z:0.000000
+toolhead: X:5.000000 Y:5.000000 Z:5.000000 E:0.000000
+gcode: X:5.000000 Y:5.000000 Z:5.000000 E:0.000000
+gcode base: X:0.000000 Y:0.000000 Z:0.000000 E:0.000000
+gcode homing: X:0.000000 Y:0.000000 Z:0.000000
+WARNING:root:Reactor 3319.344 busy for 0.193 with:
+- 'GCodeIO._process_data (gcode.py:437)',
+- 'PrinterMotionQueuing._flush_handler_debug (motion_queuing.py:235)',
+- 'GarbageCollection._handle_ready_latency.<locals>.set_latency_notifier (garbage_collection.py:72)'
+INFO:root:Exiting (print time 193.485s)
+(exit status: 0)

@@ -1,0 +1,29 @@
+site_name: Klipper for Mere Mortals
+site_description: Firmware that plans a 3D printer's moves on a real computer and leaves only timing to the printer board. The three pieces, the printer.cfg file section by section, first checks, homing, probes, input shaping and pressure advance, with the safety rules and the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/klipper-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Klipper Is: what-klipper-is.md
+  - Why Klipper Is Fast: why-klipper-is-fast.md
+  - The Three Pieces: the-three-pieces.md
+  - Installing Klipper: installing-klipper.md
+  - printer.cfg, Section by Section: printer-cfg-anatomy.md
+  - First Checks: first-checks.md
+  - Movement and Homing: movement-and-homing.md
+  - Probes and Bed Mesh: probes-and-bed-mesh.md
+  - Input Shaping: input-shaping.md
+  - Pressure Advance: pressure-advance.md
+  - Macros and Start Print: macros-and-start-print.md
+  - Moonraker and the Front Ends: moonraker-and-front-ends.md
+  - The Neighbours: the-neighbours.md
+  - Limits and Safety: limits-and-safety.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

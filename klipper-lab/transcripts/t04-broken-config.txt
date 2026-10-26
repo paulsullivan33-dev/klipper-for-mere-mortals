@@ -1,0 +1,35 @@
+$ klippy.py printer-broken.cfg -i checks.gcode -o broken.out -d $KLIPPER/out/klipper.dict
+INFO:root:Starting Klippy...
+INFO:root:Start printer at Mon Oct 26 03:52:43 2026 (1792986763.5 3320.2)
+INFO:root:Extruder max_extrude_ratio=0.266081
+INFO:root:Loaded MCU 'mcu' 149 commands (ee2c6fb / gcc: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 binutils: (GNU Binutils for Ubuntu) 2.42)
+MCU 'mcu' config: ADC_MAX=4095 CLOCK_FREQ=50000000 MCU=linux PCA9685_MAX=4096 PWM_MAX=32768 STATS_SUMSQ_BASE=256 STEPPER_STEP_BOTH_EDGE=1
+MCU 'mcu' kconfig: 'CONFIG_MACH_LINUX=y\n'
+INFO:root:Sending MCU 'mcu' printer configuration...
+ERROR:root:Config error
+Traceback (most recent call last):
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/mcu.py", line 1033, in _send_cfg_init_commands
+    self._serial.send(c)
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/serialhdl.py", line 276, in send
+    cmd = self.msgparser.create_command(msg)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/msgproto.py", line 350, in create_command
+    cmd = mp.encode_by_name(**argparts)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/msgproto.py", line 179, in encode_by_name
+    t.encode(out, params[name])
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/msgproto.py", line 108, in encode
+    raise enumeration_error(self.enum_name, v)
+msgproto.enumeration_error: Unknown value 'gpio999' in enumeration 'pin'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/klippy.py", line 135, in _connect
+    cb()
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/mcu.py", line 1080, in _connect
+    self._send_cfg_init_commands(cfg_init_cmds)
+  File "/home/hatch/workspace/klipper-scratch/klipper/klippy/mcu.py", line 1038, in _send_cfg_init_commands
+    raise self._printer.config_error(
+configparser.Error: Pin 'gpio999' is not a valid pin name on mcu 'mcu'
+(exit status: 255)

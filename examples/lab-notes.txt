@@ -1,0 +1,130 @@
+The lab — one build, one invented printer, no hardware
+=======================================================
+
+The lab is Klipper as its own project
+ships it, built and run on the build
+machine (an Ubuntu 24.04 sandbox,
+2 CPUs, 7.7 GB RAM). No printer was
+attached at any point; nothing moved
+and nothing got hot.
+
+  * Klipper ee2c6fb (a clone of the
+    project's repository, 2026-10-21),
+    host side (klippy) on Python 3.12.3
+    in a fresh virtual environment.
+  * The microcontroller side built for
+    the "Linux process" target
+    (test/configs/linuxprocess.config):
+    the board firmware compiled into an
+    ordinary Linux program,
+    out/klipper.elf, plus its protocol
+    dictionary, out/klipper.dict.
+  * One invented printer
+    (klipper-lab/printer.cfg): a generic
+    Cartesian machine, 220 x 220 x 250 mm,
+    single Z leadscrew, invented end to
+    end. Its pin names are the Linux
+    target's gpio names.
+
+What the lab ran, in
+klipper-lab/transcripts/:
+
+  * t00 the build: clone, the Linux
+    process configuration, make, and
+    the two products (klipper.elf,
+    883 KB; klipper.dict).
+  * t01 the real pair, live: klipper.elf
+    started as a process and created
+    /tmp/klipper_host_mcu; klippy
+    connected to it over that link,
+    identified the firmware as its own
+    build (ee2c6fb), sent the lab
+    config — and the simulated board
+    shut down at the temperature
+    sensor: "Unable to open adc
+    device". The sandbox has no
+    analogue hardware for the Linux
+    target to read (its analogue pins
+    expect a real IIO device, its
+    digital pins a real GPIO chip), so
+    a live run stops there. The API
+    socket still answered throughout:
+    the info report, an M115 answered
+    with the firmware name and
+    version, and an object query.
+    run-live.sh and api_probe.py are
+    the programs that did this.
+  * t02 the same printer.cfg in
+    klippy's batch mode, which drives
+    the simulated board from the
+    build's own dictionary instead of
+    a live process: config sent and
+    accepted, position reported at
+    zero, G28 homed all three axes,
+    G1 moves to X100 Y100 Z10, the
+    START_PRINT macro ran and parked
+    the toolhead at X5 Y5 Z5, clean
+    exit.
+  * t03 the tuning knobs changed at
+    run time: SET_PRESSURE_ADVANCE
+    0.060 and SET_INPUT_SHAPER
+    frequencies logged by klippy as
+    in force, and a Z gcode offset of
+    0.10 visible in the position
+    report.
+  * t04 the same config with one pin
+    mistyped (gpio999):
+    "Pin 'gpio999' is not a valid pin
+    name on mcu 'mcu'", exit 255.
+  * t90 the first-day trap, run on
+    purpose: a move before homing —
+    "Must home axis first", exit 255.
+
+The sandbox's rules, discovered by
+running into them:
+
+  * The Linux-process board is a real
+    board driver wearing a process
+    costume: its digital pins open
+    /dev/gpiochip* and its analogue
+    pins open /sys/bus/iio devices.
+    A machine without that hardware
+    (this sandbox has neither) gets a
+    firmware that starts, identifies
+    itself, accepts a connection —
+    and shuts down at the first
+    sensor. That is t01, and it is
+    why the movement transcripts are
+    batch-mode runs: batch mode
+    simulates the board's answers
+    from the dictionary, so klippy
+    can be exercised end to end
+    without pretending the hardware
+    was there.
+  * Commands whose answers travel the
+    reply stream (M115, M105, M114)
+    leave no trace in batch mode's
+    log; their text is captured from
+    the live API in t01. GET_POSITION
+    writes its report to the log,
+    which is why the batch scripts
+    use it as their visible check.
+  * The RESPOND command needs a
+    [respond] section in the config.
+    The lab's first batch run failed
+    the macro on exactly that; the
+    section is in printer.cfg now,
+    commented, as a kept lesson.
+
+Documented only (no printer, no Pi,
+no accelerometer in the lab):
+flashing a real board; KIAUH and the
+installer scripts; real homing
+behaviour, endstop wiring and
+probes; bed mesh probing; resonance
+measurement with an accelerometer
+and shaper tuning from real graphs;
+pressure advance tuning from a real
+test print; Moonraker, Mainsail and
+Fluidd in a browser; printing an
+actual part.

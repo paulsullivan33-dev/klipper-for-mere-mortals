@@ -1,0 +1,63 @@
+Commands the lab ran, in order
+==============================
+
+Build (transcript t00):
+
+  git clone https://github.com/Klipper3d/klipper.git
+  cd klipper
+  git log -1 --format="%H %cs"
+  cp test/configs/linuxprocess.config .config
+  make olddefconfig
+  make -j2
+  ls -la out/klipper.elf out/klipper.dict
+
+Host environment (chapter 4):
+
+  python3 -m venv klippy-env
+  klippy-env/bin/pip install -r klipper/scripts/klippy-requirements.txt
+
+The live pair (transcript t01), driven
+by klipper-lab/run-live.sh:
+
+  out/klipper.elf &
+  klippy.py klipper-lab/printer.cfg -a api.sock -l klippy.log &
+  python3 klipper-lab/api_probe.py api.sock
+
+Batch mode (transcripts t02, t03, t04,
+t90). KLIPPER points at the clone:
+
+  klippy.py printer.cfg -i checks.gcode \
+      -o checks.out -d $KLIPPER/out/klipper.dict
+  klippy.py printer.cfg -i tuning.gcode \
+      -o tuning.out -d $KLIPPER/out/klipper.dict
+  klippy.py printer-broken.cfg -i checks.gcode \
+      -o broken.out -d $KLIPPER/out/klipper.dict
+  klippy.py printer.cfg -i move-first.gcode \
+      -o move-first.out -d $KLIPPER/out/klipper.dict
+
+The -o file is the raw instruction
+stream klippy would have sent the
+board; the lab discards it. The
+transcripts keep the log output and
+the exit status of each run.
+
+Failures kept on purpose:
+
+  * t01: the live board shuts down —
+    "Unable to open adc device" — the
+    sandbox has no IIO analogue device
+    and no GPIO chip for the Linux
+    target's pins.
+  * t04: one mistyped pin (gpio999)
+    and klippy refuses the whole
+    config, exit 255.
+  * t90: a move before homing,
+    refused — "Must home axis first",
+    exit 255.
+  * First batch run only (not kept as
+    a transcript; told in
+    examples/lab-notes.txt): the
+    START_PRINT macro failed with
+    Unknown command "RESPOND" until
+    printer.cfg grew its [respond]
+    section.

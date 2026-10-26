@@ -1,0 +1,16 @@
+$ git clone https://github.com/Klipper3d/klipper.git
+$ cd klipper && git log -1 --format="%H %cs"
+ee2c6fb6b00b2b5d097ef70d0868df7d74943b51 2026-10-21
+$ cp test/configs/linuxprocess.config .config
+$ make olddefconfig
+Loaded configuration '/home/hatch/workspace/klipper-scratch/klipper/.config'
+No change to configuration in '/home/hatch/workspace/klipper-scratch/klipper/.config'
+$ make clean >/dev/null && make -j2
+  Building out/compile_time_request.o
+Loaded configuration '/home/hatch/workspace/klipper-scratch/klipper/.config'
+Minimal configuration saved to 'out/defconfig'
+Version: ee2c6fb
+  Linking out/klipper.elf
+$ ls -la out/klipper.elf out/klipper.dict
+-rw-rw---- 1 root root  12515 Oct 26 03:51 out/klipper.dict
+-rwxrwx--- 1 root root 883424 Oct 26 03:51 out/klipper.elf

@@ -1,0 +1,26 @@
+$ klippy.py printer.cfg -i tuning.gcode -o tuning.out -d $KLIPPER/out/klipper.dict
+INFO:root:Starting Klippy...
+INFO:root:Start printer at Mon Oct 26 03:52:43 2026 (1792986763.0 3319.7)
+INFO:root:Extruder max_extrude_ratio=0.266081
+INFO:root:Loaded MCU 'mcu' 149 commands (ee2c6fb / gcc: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 binutils: (GNU Binutils for Ubuntu) 2.42)
+MCU 'mcu' config: ADC_MAX=4095 CLOCK_FREQ=50000000 MCU=linux PCA9685_MAX=4096 PWM_MAX=32768 STATS_SUMSQ_BASE=256 STEPPER_STEP_BOTH_EDGE=1
+MCU 'mcu' kconfig: 'CONFIG_MACH_LINUX=y\n'
+INFO:root:Sending MCU 'mcu' printer configuration...
+INFO:root:Configured MCU 'mcu' (500 moves)
+INFO:root:extruder: pressure_advance: 0.060000
+pressure_advance_smooth_time: 0.040000
+INFO:root:shaper_type_x:mzv shaper_freq_x:45.000 damping_ratio_x:0.100000
+INFO:root:shaper_type_y:mzv shaper_freq_y:41.000 damping_ratio_y:0.100000
+INFO:root:mcu: stepper_x:-26800 stepper_y:-26800 stepper_z:-152000
+stepper: stepper_x:0.000000 stepper_y:0.000000 stepper_z:0.000000
+kinematic: X:0.000000 Y:0.000000 Z:0.000000
+toolhead: X:0.000000 Y:0.000000 Z:0.100000 E:0.000000
+gcode: X:0.000000 Y:0.000000 Z:0.100000 E:0.000000
+gcode base: X:0.000000 Y:0.000000 Z:0.100000 E:0.000000
+gcode homing: X:0.000000 Y:0.000000 Z:0.100000
+WARNING:root:Reactor 3319.917 busy for 0.138 with:
+- 'GCodeIO._process_data (gcode.py:437)',
+- 'PrinterMotionQueuing._flush_handler_debug (motion_queuing.py:235)',
+- 'GarbageCollection._handle_ready_latency.<locals>.set_latency_notifier (garbage_collection.py:72)'
+INFO:root:Exiting (print time 94.013s)
+(exit status: 0)

@@ -1,0 +1,18 @@
+$ klipper.elf &   (the simulated microcontroller)
+$ ls -l /tmp/klipper_host_mcu
+lrwxrwxrwx 1 root root 10 Oct 26 03:51 /tmp/klipper_host_mcu -> /dev/pts/1
+$ klippy.py printer.cfg -a api.sock -l klippy.log &
+$ python3 api_probe.py api.sock
+>>> sent: {"id": 1, "method": "info"}
+<<< recv: {"id":1,"result":{"state":"shutdown","state_message":"MCU 'mcu' shutdown: Unable to open adc device\nOnce the underlying issue is corrected, use the\n\"FIRMWARE_RESTART\" command to reset the firmware, reload the\nconfig, and restart the host software.\nPrinter is shutdown\n","hostname":"htch-runtime","klipper_path":"/home/hatch/workspace/klipper-scratch/klipper","python_path":"/home/hatch/workspace/klipper-scratch/klippy-env/bin/python","process_id":43333,"user_id":0,"group_id":0,"log_file":"/home/hatch/workspace/klipper-for-mere-mortals/klipper-lab/.run/klippy.log","config_file":"/home/hatch/workspace/klipper-for-mere-mortals/klipper-lab/printer.cfg","software_version":"ee2c6fb","cpu_info":"2 core AMD EPYC 9D25 126-Core Processor"}}
+>>> sent: {"id": 2, "method": "gcode/subscribe_output"}
+<<< recv: {"id":2,"result":{}}
+>>> sent: {"id": 3, "method": "gcode/script", "params": {"script": "M115"}}
+<<< recv: {"params":{"response":"// FIRMWARE_NAME:Klipper FIRMWARE_VERSION:ee2c6fb"}}
+<<< recv: {"id":3,"result":{}}
+>>> sent: {"id": 4, "method": "objects/query", "params": {"objects": {"toolhead": ["position"], "motion_report": ["live_position"], "extruder": ["temperature"], "heater_bed": ["temperature"]}}}
+<<< recv: {"id":4,"result":{"eventtime":3282.216384286,"status":{"toolhead":{"position":[0.0,0.0,0.0,0.0]},"motion_report":{"live_position":[0.0,0.0,0.0,0]},"extruder":{"temperature":0.0},"heater_bed":{"temperature":0.0}}}}
+$ cat mcu.log
+Got error -1 in analog open: (2)No such file or directory
+$ grep -m1 'Git version' klippy.log
+Git version: 'ee2c6fb'
